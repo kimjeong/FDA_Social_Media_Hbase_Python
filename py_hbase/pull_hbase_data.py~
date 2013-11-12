@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+import io
+import sys
+import time
+import requests
+
+if __name__ == '__main__':
+
+    tablename = "ecig_fda_twitter_table"
+    baseurl = "http://localhost:8080"
+
+    tw_fh = open('ecig_tweets.txt','w')
+    request = requests.get(baseurl + "/" + tablename + "/ecig_text_data:*", headers={"Accept" : "text/xml"})
+
+    root = fromstring(request.text)
+
+    # Go through every row passed back
+    for row in root:
+        message = ''
+        linenumber = 0
+        username = ''
+    
+     # Go through every cell in the row
+        for cell in row:
+            columnname = base64.b64decode(cell.get('column'))
+
+            if cell.text == None:
+                 continue
+    
+            if columnname == cfname + ":" + messagecolumn:
+                 message = base64.b64decode(cell.text)
+            elif columnname == cfname + ":" + linenumbercolumn:
+                 linenumber = decode(cell.text)
+            elif columnname == cfname + ":" + usernamecolumn:
+                 username = base64.b64decode(cell.text)
+
+        rowKey = base64.b64decode(row.get('key'))
